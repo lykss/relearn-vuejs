@@ -17,6 +17,10 @@
   <div id="raw_html">Using mustaches:{{rawHtml}}</div>
   <div id="text_html" v-html="rawHtml"></div>
 
+  <!-- Mustache语法不能用在HTML特性上，遇到这种情况应该使用v-bind指令 -->
+  <!-- 在布尔特性的情况下，存在即暗示为true -->
+  <div id="title" v-bind:title="title">这里有title</div>
+
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 
   <script>
@@ -52,6 +56,15 @@
       data () {
         return {
           rawHtml: '<span>span tag</span>'
+        }
+      }
+    })
+
+    var titleVM = new Vue({
+      el: '#title',
+      data () {
+        return {
+          title: 'this is title'
         }
       }
     })
