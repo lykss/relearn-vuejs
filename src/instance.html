@@ -14,9 +14,14 @@
 
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
   <script>
+
+    /*
+     * 注意点：
+     * 1.不要在选项属性或回调上使用箭头函数(箭头函数是和父级上下文绑定在一起,因此this不会是预期的vue实例)
+     */
     var vm = new Vue({
       el: '#app',
-      data: function() {
+      data () {
         return {
           obj: {
             foo: 'bar'
