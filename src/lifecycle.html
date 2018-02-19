@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Lifecycle</title>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+    <script>
+
+      /*
+       * Vue组件生命周期
+       * 
+       * 调用 new Vue(option);
+       * 
+       * 初始化事件监听器以及组件生命周期
+       * 组件内部执行beforeCreate回调钩子
+       * 初始化数据注入等交互行为
+       * 组件内部执行created回调钩子
+       * 
+       * 如果有el选项则直接判断是否有template选项，否则当vm.$mount(el)被调用时判断是否有template选项、
+       * 如果有template选项则把template编译为render函数，否则把el的outerHTML作为模版来编译
+       * 
+       * 组件内部执行beforeMount回调钩子
+       * 创建实例
+       * 组件内部执行mounted回调钩子
+       * 
+       * 组件mounted以后，当数据发生改变时
+       * 组件内部执行beforeUpdate回调钩子
+       * Virtual DOM重新渲染页面
+       * 组件内部执行updated回调钩子
+       * 
+       * 当vm.$destroy方法调用时
+       * 组件内部执行beforeDestroy回调钩子
+       * 移除watcher、子组件、事件监听器
+       * 组件内部执行destroyed回调钩子
+       * 组件被销毁
+       */
+      var vm = new Vue({
+        beforeCreate () {
+          console.log('before vue component create');
+        },
+        created () {
+          console.log('after vue component created');
+        },
+        beforeMount () {
+          console.log('before vue component mount');
+        },
+        mounted () {
+          console.log('after vue component mounted');
+        },
+        beforeUpdate () {
+          console.log('before vue component update');
+        },
+        updated () {
+          console.log('after vue component updated');
+        },
+        beforeDestroy () {
+          console.log('before vue component destroy');
+        },
+        destroyed () {
+          console.log('after vue component destroyed');
+        }
+      });
+    </script>
+</body>
+</html>
