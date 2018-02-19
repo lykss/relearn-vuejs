@@ -13,6 +13,10 @@
   <!-- 只执行一次的数据绑定，当数据改变时，差值处的内容不会更新 -->
   <div id="once" v-once>这个将不会改变：{{msg}}</div>
 
+  <!-- 原始HTML插值 -->
+  <div id="raw_html">Using mustaches:{{rawHtml}}</div>
+  <div id="text_html" v-html="rawHtml"></div>
+
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 
   <script>
@@ -30,6 +34,24 @@
       data () {
         return {
           msg: 'this is a hard message'
+        }
+      }
+    })
+
+    var rawHtmlVM = new Vue({
+      el: '#raw_html',
+      data () {
+        return {
+          rawHtml: '<span>span tag</span>'
+        }
+      }
+    });
+
+    var textHtmlVM = new Vue({
+      el: '#text_html',
+      data () {
+        return {
+          rawHtml: '<span>span tag</span>'
         }
       }
     })
