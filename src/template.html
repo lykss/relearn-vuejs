@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Template</title>
+</head>
+<body>
+  <!-- 文本内容的数据绑定 -->
+  <div id="text">Message: {{msg}}</div>
+
+  <!-- 只执行一次的数据绑定，当数据改变时，差值处的内容不会更新 -->
+  <div id="once" v-once>这个将不会改变：{{msg}}</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+
+  <script>
+    var textVM = new Vue({
+      el: '#text',
+      data () {
+        return {
+          msg: 'this is a message'
+        }
+      }
+    });
+
+    var onceVM = new Vue({
+      el: '#once',
+      data () {
+        return {
+          msg: 'this is a hard message'
+        }
+      }
+    })
+  </script>
+</body>
+</html>
