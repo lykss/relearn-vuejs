@@ -21,6 +21,13 @@
   <!-- 在布尔特性的情况下，存在即暗示为true -->
   <div id="title" v-bind:title="title">这里有title</div>
 
+  <!-- Javascript表达式 -->
+  <!-- 表达式会在所属Vue实例的数据作用域下作为javascript被解析 -->
+  <!-- 每个绑定只能包含单个表达式 -->
+  <!-- 流控制不会生效，请使用三元表达式 -->
+  <!-- 模板表达式被放在沙盒中，只能访问全局变量的白名单，因此不能在模板表达式中访问用户定义的全局变量 -->
+  <div id="expression">{{ok ? 'Yes' : 'No'}}</div>
+
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 
   <script>
@@ -68,6 +75,15 @@
         }
       }
     })
+
+    var expressionVM = new Vue({
+      el: '#expression',
+      data () {
+        return {
+          ok: true
+        }
+      }
+    });
   </script>
 </body>
 </html>
