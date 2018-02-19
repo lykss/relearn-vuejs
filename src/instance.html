@@ -12,6 +12,60 @@
     <button @click="obj.foo = 'baz'">Change it</button>
   </div>
 
+  <pre>
+    <code>
+      new Vue(options);
+        this._init(options);
+
+      initMixin(Vue)
+        Vue.prototype._init = function(){
+          创建实例vm
+          设置_uid(uid自增)
+          初始化内部组件
+          合并options // vm.$options = mergeOptions()
+          设置代理
+          初始化生命周期
+          初始化事件注册
+          初始化渲染器
+          设置beforeCreate回调钩子
+          初始化数据注入
+          初始化state
+          初始化数据提供器
+          设置created回调钩子
+          如果options中的el存在有效值则调用vm.$mount(vm.$options.el)
+        }
+
+      stateMinix(Vue)
+        设置data的get和set方法
+        设置props的get和set方法
+        在Vue.prototype上定义$data
+        在Vue.prototype上定义$props
+        在Vue.prototype上定义$set
+        在Vue.prototype上定义$delete
+        在Vue.prototype上定义$watch
+
+      eventsMixin(Vue)
+        在Vue.prototype上设置$on方法
+        在Vue.prototype上设置$once方法
+        在Vue.prototype上设置$off方法
+        在Vue.prototype上设置$emit方法
+
+      lifecycleMixin(Vue)
+        在Vue.prototype上定义_update方法
+        在Vue.prototype上定义$forceUpdate方法
+        在Vue.prototype上定义$destroy方法
+          当调用$destroy方法时
+            1.调用beforeDestroy回调钩子函数
+            2.移除DOM元素
+            3.移除watcher
+            4.调用destroyed回调钩子函数
+
+      renderMixin(Vue)
+        在Vue.prototype上定义$nextTick方法
+        在Vue.prototype上定义_render方法
+    </code>
+  </pre>
+
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
   <script>
 
