@@ -18,6 +18,17 @@
   <!-- 绑定的数据对象不必内联定义在模板里 -->
   <div id="demo3" v-bind:class="classObject"></div>
 
+
+
+  <!-- 数组语法 -->
+  <div id="demo4" v-bind:class="[activeClass, errorClass]"></div>
+
+  <!-- 使用三元表达式 -->
+  <div id="demo5" v-bind:class="[isActive ? activeClass : '', errorClass]"></div>
+
+  <!-- 数组语法中使用对象语法 -->
+  <div id="demo6" v-bind:class="[{active: isActive}, errorClass]"></div>
+
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 
   <script>
@@ -48,6 +59,37 @@
             active: true,
             'text-danger': false
           }
+        }
+      }
+    });
+
+    var demo4VM = new Vue({
+      el: '#demo4',
+      data () {
+        return {
+          activeClass: 'active',
+          errorClass: 'text-danger'
+        }
+      }
+    });
+
+    var demo5VM = new Vue({
+      el: '#demo5',
+      data () {
+        return {
+          isActive: true,
+          activeClass: 'active',
+          errorClass: 'err'
+        }
+      }
+    });
+
+    var demo6VM = new Vue({
+      el: '#demo6',
+      data () {
+        return {
+          isActive: true,
+          errorClass: 'err'
         }
       }
     });
