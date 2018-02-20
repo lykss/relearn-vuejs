@@ -28,6 +28,12 @@
   <!-- 模板表达式被放在沙盒中，只能访问全局变量的白名单，因此不能在模板表达式中访问用户定义的全局变量 -->
   <div id="expression">{{ok ? 'Yes' : 'No'}}</div>
 
+  <!-- 指令 -->
+  <!-- 指令是带有v-前缀的特殊属性 -->
+  <!-- 指令属性的值预期是单个javascript表达式(v-for是例外情况) -->
+  <!-- 指令的职责是当表达式的值改变时将其产生的连带影响响应式地作用于DOM -->
+  <div id="directives" v-if="seen">现在你看到我了</div>
+
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 
   <script>
@@ -84,6 +90,15 @@
         }
       }
     });
+
+    var directivesVM = new Vue({
+      el: '#directives',
+      data() {
+        return {
+          seen: true
+        }
+      }
+    })
   </script>
 </body>
 </html>
