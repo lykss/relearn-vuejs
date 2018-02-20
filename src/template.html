@@ -34,6 +34,11 @@
   <!-- 指令的职责是当表达式的值改变时将其产生的连带影响响应式地作用于DOM -->
   <div id="directives" v-if="seen">现在你看到我了</div>
 
+  <!-- 参数 -->
+  <!-- 在指令名称之后以冒号表示指令接收的参数 -->
+  <a id="bind_href" v-bind:href="url">把a标签的href属性值与url表达式的值进行绑定</a>
+  <button id="bind_click" type="button" v-on:click="handleClick">把button标签的onClick属性与handleClick表达式的值进行绑定</button>
+
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 
   <script>
@@ -99,6 +104,29 @@
         }
       }
     })
+
+    var bindHrefVM = new Vue({
+      el: '#bind_href',
+      data() {
+        return {
+          url: 'http://www.baidu.com'
+        }
+      }
+    });
+
+    var bindClickVM = new Vue({
+      el: '#bind_click',
+      data () {
+        return {
+          
+        }
+      },
+      methods: {
+        handleClick() {
+          console.log('handle click');
+        }
+      }
+    });
   </script>
 </body>
 </html>
