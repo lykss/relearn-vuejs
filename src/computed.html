@@ -16,6 +16,11 @@
     <p>Computed reversed message: "{{reversedMessage}}"</p>
   </div>
 
+  <!-- 把表达式定义为一个函数或者一个计算属性结果完全一样 -->
+  <!-- 不同的是，计算属性是基于依赖进行缓存的，只要依赖没有发生改变则不会重新求值 -->
+  <!-- 而调用方法时则总是会进行计算 -->
+  <!-- 因此当希望使用缓存时应该使用计算属性而不是使用方法 -->
+
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 
   <script>
