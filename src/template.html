@@ -48,6 +48,9 @@
   <a id="v_bind_full" v-bind:href="url">v-bind指令完整语法</a>
   <a id="v_bind_short" :href="url">v-bind指令缩写</a>
 
+  <!-- v-on缩写 -->
+  <button id="v_on_full" type="button" v-on:click="handleClick">v-on指令完整语法</button>
+
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 
   <script>
@@ -160,6 +163,15 @@
       data () {
         return {
           url: 'http://www.baidu.com'
+        }
+      }
+    });
+
+    var vOnFullVM = new Vue({
+      el: '#v_on_full',
+      methods: {
+        handleClick() {
+          console.log('handle click');
         }
       }
     });
