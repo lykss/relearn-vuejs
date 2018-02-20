@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Bind Class</title>
+</head>
+<body>
+
+  <!-- 绑定HTML Class -->
+  <!-- 对象语法 -->
+  <div id="demo1" v-bind:class="{ active: isActive }"></div>
+
+  <!-- v-bind:class指令可以和普通的class属性共存 -->
+  <div id="demo2" class="static" v-bind:class="{ active: isActive, 'text-danger': hasError }"></div>
+
+  <!-- 绑定的数据对象不必内联定义在模板里 -->
+  <div id="demo3" v-bind:class="classObject"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+
+  <script>
+    var demo1VM = new Vue({
+      el: '#demo1',
+      data () {
+        return {
+          isActive: true
+        }
+      }
+    });
+
+    var demo2VM = new Vue({
+      el: '#demo2',
+      data () {
+        return {
+          isActive: true,
+          hasError: false
+        }
+      }
+    });
+
+    var demo3VM = new Vue({
+      el: '#demo3',
+      data () {
+        return {
+          classObject: {
+            active: true,
+            'text-danger': false
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
