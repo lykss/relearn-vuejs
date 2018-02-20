@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>watcher</title>
+</head>
+<body>
+
+
+  <!-- 当需要在数据变化时执行异步或开销较大的操作时，watch这个方式是最有用的 -->
+  <div id="watch_example">
+    <p>
+      Ask a yes/no question:
+      <input type="text" v-model="question">
+    </p>
+    <p>{{ answer }}</p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+
+  <script>
+    var watchExampleVM = new Vue({
+      el: '#watch_example',
+      data () {
+        return {
+          question: '',
+          answer: 'I cannot give you an answer until you ask a question'
+        }
+      },
+      watch: {
+        question: function(newVal, oldVal) {
+          this.answer = 'Wating for you to stop typing...';
+          this.getAnswer();
+        }
+      },
+      methods: {
+        getAnswer: function() {
+          this.answer = Math.random() > 0.5 ? 'Yes' : 'No';
+        }
+      }
+    });
+  </script>
+</body>
+</html>
