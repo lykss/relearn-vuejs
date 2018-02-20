@@ -50,6 +50,7 @@
 
   <!-- v-on缩写 -->
   <button id="v_on_full" type="button" v-on:click="handleClick">v-on指令完整语法</button>
+  <button id="v_on_short" type="button" @click="handleClick">v-on指令缩写</button>
 
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 
@@ -169,6 +170,15 @@
 
     var vOnFullVM = new Vue({
       el: '#v_on_full',
+      methods: {
+        handleClick() {
+          console.log('handle click');
+        }
+      }
+    });
+
+    var vOnShortVM = new Vue({
+      el: '#v_on_short',
       methods: {
         handleClick() {
           console.log('handle click');
