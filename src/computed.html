@@ -30,6 +30,15 @@
   <!-- 上面例子更好的做法 -->
   <div id="watch_better_demo">{{ fullName }}</div>
 
+
+
+  <!-- 计算属性的setter -->
+  <!-- 计算属性默认只有getter -->
+  <!-- 在需要的时候可以提供一个setter -->
+  <div id="computed_setter_demo">{{ fullName }}</div>
+
+
+
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 
   <script>
@@ -78,6 +87,30 @@
       computed: {
         fullName: function() {
           return this.firstName + ' ' + this.lastName;
+        }
+      }
+    });
+
+    var computedSetterDemoVM = new Vue({
+      el: '#computed_setter_demo',
+      data () {
+        return {
+          firstName: 'Foo',
+          lastName: 'Bar'
+        }
+      },
+      computed: {
+        fullName: {
+          // getter
+          get: function() {
+            return this.firstName + ' ' + this.lastName;
+          },
+          // setter
+          set: function(newVal) {
+            var names = newVal.split(' ');
+            this.firstName = names[0];
+            this.lastName = names[names.length - 1];
+          }
         }
       }
     });
