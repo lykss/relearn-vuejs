@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Template</title>
+</head>
+<body>
+  <!-- 文本内容的数据绑定 -->
+  <div id="text">Message: {{msg}}</div>
+
+  <!-- 只执行一次的数据绑定，当数据改变时，差值处的内容不会更新 -->
+  <div id="once" v-once>这个将不会改变：{{msg}}</div>
+
+  <!-- 原始HTML插值 -->
+  <div id="raw_html">Using mustaches:{{rawHtml}}</div>
+  <div id="text_html" v-html="rawHtml"></div>
+
+  <!-- Mustache语法不能用在HTML特性上，遇到这种情况应该使用v-bind指令 -->
+  <!-- 在布尔特性的情况下，存在即暗示为true -->
+  <div id="title" v-bind:title="title">这里有title</div>
+
+  <!-- Javascript表达式 -->
+  <!-- 表达式会在所属Vue实例的数据作用域下作为javascript被解析 -->
+  <!-- 每个绑定只能包含单个表达式 -->
+  <!-- 流控制不会生效，请使用三元表达式 -->
+  <!-- 模板表达式被放在沙盒中，只能访问全局变量的白名单，因此不能在模板表达式中访问用户定义的全局变量 -->
+  <div id="expression">{{ok ? 'Yes' : 'No'}}</div>
+
+  <!-- 指令 -->
+  <!-- 指令是带有v-前缀的特殊属性 -->
+  <!-- 指令属性的值预期是单个javascript表达式(v-for是例外情况) -->
+  <!-- 指令的职责是当表达式的值改变时将其产生的连带影响响应式地作用于DOM -->
+  <div id="directives" v-if="seen">现在你看到我了</div>
+
+  <!-- 参数 -->
+  <!-- 在指令名称之后以冒号表示指令接收的参数 -->
+  <a id="bind_href" v-bind:href="url">把a标签的href属性值与url表达式的值进行绑定</a>
+  <button id="bind_click" type="button" v-on:click="handleClick">把button标签的onClick属性与handleClick表达式的值进行绑定</button>
+
+  <!-- 修饰符 -->
+  <!-- 使用.指明的特殊后缀，用于指出一个指令应该以特殊方式绑定 -->
+  <!-- .prevent修饰符告诉v-on指令对于触发的事件调用event.preventDefault() -->
+  <button id="prevent" type="button" v-on:click.prevent="handleClick">使用.prevent修饰符</button>
+
+  <!-- v-bind缩写 -->
+  <a id="v_bind_full" v-bind:href="url">v-bind指令完整语法</a>
+  <a id="v_bind_short" :href="url">v-bind指令缩写</a>
+
+  <!-- v-on缩写 -->
+  <button id="v_on_full" type="button" v-on:click="handleClick">v-on指令完整语法</button>
+  <button id="v_on_short" type="button" @click="handleClick">v-on指令缩写</button>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+
+  <script>
+    var textVM = new Vue({
+      el: '#text',
+      data () {
+        return {
+          msg: 'this is a message'
+        }
+      }
+    });
+
+    var onceVM = new Vue({
+      el: '#once',
+      data () {
+        return {
+          msg: 'this is a hard message'
+        }
+      }
+    });
+
+    var rawHtmlVM = new Vue({
+      el: '#raw_html',
+      data () {
+        return {
+          rawHtml: '<span>span tag</span>'
+        }
+      }
+    });
+
+    var textHtmlVM = new Vue({
+      el: '#text_html',
+      data () {
+        return {
+          rawHtml: '<span>span tag</span>'
+        }
+      }
+    });
+
+    var titleVM = new Vue({
+      el: '#title',
+      data () {
+        return {
+          title: 'this is title'
+        }
+      }
+    });
+
+    var expressionVM = new Vue({
+      el: '#expression',
+      data () {
+        return {
+          ok: true
+        }
+      }
+    });
+
+    var directivesVM = new Vue({
+      el: '#directives',
+      data() {
+        return {
+          seen: true
+        }
+      }
+    });
+
+    var bindHrefVM = new Vue({
+      el: '#bind_href',
+      data() {
+        return {
+          url: 'http://www.baidu.com'
+        }
+      }
+    });
+
+    var bindClickVM = new Vue({
+      el: '#bind_click',
+      data () {
+        return {
+          
+        }
+      },
+      methods: {
+        handleClick() {
+          console.log('handle click');
+        }
+      }
+    });
+
+    var preventVM = new Vue({
+      el: '#prevent',
+      methods: {
+        handleClick() {
+          console.log('handle click');
+        }
+      }
+    });
+
+    var vBindFullVM = new Vue({
+      el: '#v_bind_full',
+      data() {
+        return {
+          url: 'http://www.baidu.com'
+        }
+      }
+    });
+
+    var vBindShortVM = new Vue({
+      el: '#v_bind_short',
+      data () {
+        return {
+          url: 'http://www.baidu.com'
+        }
+      }
+    });
+
+    var vOnFullVM = new Vue({
+      el: '#v_on_full',
+      methods: {
+        handleClick() {
+          console.log('handle click');
+        }
+      }
+    });
+
+    var vOnShortVM = new Vue({
+      el: '#v_on_short',
+      methods: {
+        handleClick() {
+          console.log('handle click');
+        }
+      }
+    });
+  </script>
+</body>
+</html>
