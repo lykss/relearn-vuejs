@@ -46,6 +46,7 @@
 
   <!-- v-bind缩写 -->
   <a id="v_bind_full" v-bind:href="url">v-bind指令完整语法</a>
+  <a id="v_bind_short" :href="url">v-bind指令缩写</a>
 
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 
@@ -148,6 +149,15 @@
     var vBindFullVM = new Vue({
       el: '#v_bind_full',
       data() {
+        return {
+          url: 'http://www.baidu.com'
+        }
+      }
+    });
+
+    var vBindShortVM = new Vue({
+      el: '#v_bind_short',
+      data () {
         return {
           url: 'http://www.baidu.com'
         }
