@@ -29,7 +29,15 @@
   <!-- 当v-bind:style使用需要添加浏览器引擎前缀的CSS属性时，例如transform，Vue.js会自动侦测并添加相应的前缀 -->
 
 
-  
+
+  <!-- 多重值 -->
+  <!-- 从2.3.0起可以为style绑定中的属性提供一个包含多个值的数组，常用于提供多个带前缀的值 -->
+  <!-- 这样写只会渲染数组中最后一个被浏览器支持的值 -->
+  <!-- 在本例中如果浏览器支持不带浏览器前缀的flexbox那么就只会渲染display: flex -->
+  <div id="demo4" :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }"></div>
+
+
+
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
   <script>
     var demo1VM = new Vue({
@@ -68,6 +76,10 @@
           }
         }
       }
+    });
+
+    var demo4VM = new Vue({
+      el: '#demo4'
     });
   </script>
 </body>
