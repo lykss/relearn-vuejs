@@ -44,6 +44,9 @@
   <!-- .prevent修饰符告诉v-on指令对于触发的事件调用event.preventDefault() -->
   <button id="prevent" type="button" v-on:click.prevent="handleClick">使用.prevent修饰符</button>
 
+  <!-- v-bind缩写 -->
+  <a id="v_bind_full" v-bind:href="url">v-bind指令完整语法</a>
+
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 
   <script>
@@ -138,6 +141,15 @@
       methods: {
         handleClick() {
           console.log('handle click');
+        }
+      }
+    });
+
+    var vBindFullVM = new Vue({
+      el: '#v_bind_full',
+      data() {
+        return {
+          url: 'http://www.baidu.com'
         }
       }
     });
