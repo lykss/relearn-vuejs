@@ -21,6 +21,15 @@
   <!-- 而调用方法时则总是会进行计算 -->
   <!-- 因此当希望使用缓存时应该使用计算属性而不是使用方法 -->
 
+
+  <!-- 计算属性 vs 侦听属性 -->
+  <!-- 当存在一些数据需要随着其他数据变动而变动时，非常容易滥用watch -->
+  <!-- 通常更好的做法是使用计算属性而不是命令式的watch回调 -->
+  <div id="watch_demo">{{ fullName }}</div>
+
+  <!-- 上面例子更好的做法 -->
+  <div id="watch_better_demo">{{ fullName }}</div>
+
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 
   <script>
@@ -35,6 +44,40 @@
         reversedMessage() {
           // this指向vm实例
           return this.message.split('').reverse().join('');
+        }
+      }
+    });
+
+    var watchDemoVM = new Vue({
+      el: '#watch_demo',
+      data () {
+        return {
+          firstName: 'Foo',
+          lastName: 'Bar',
+          fullName: 'Foo Bar'
+        }
+      },
+      watch: {
+        firstName: function(val) {
+          this.fullName = val + ' ' + this.lastName;
+        },
+        lastName: function(val) {
+          this.fullName = this.firstName + ' ' + val;
+        }
+      }
+    });
+
+    var watchBetterDemoVM = new Vue({
+      el: '#watch_better_demo',
+      data () {
+        return {
+          firstName: 'Foo',
+          lastName: 'Bar'
+        }
+      },
+      computed: {
+        fullName: function() {
+          return this.firstName + ' ' + this.lastName;
         }
       }
     });
