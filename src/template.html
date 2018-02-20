@@ -39,6 +39,11 @@
   <a id="bind_href" v-bind:href="url">把a标签的href属性值与url表达式的值进行绑定</a>
   <button id="bind_click" type="button" v-on:click="handleClick">把button标签的onClick属性与handleClick表达式的值进行绑定</button>
 
+  <!-- 修饰符 -->
+  <!-- 使用.指明的特殊后缀，用于指出一个指令应该以特殊方式绑定 -->
+  <!-- .prevent修饰符告诉v-on指令对于触发的事件调用event.preventDefault() -->
+  <button id="prevent" type="button" v-on:click.prevent="handleClick">使用.prevent修饰符</button>
+
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 
   <script>
@@ -121,6 +126,15 @@
           
         }
       },
+      methods: {
+        handleClick() {
+          console.log('handle click');
+        }
+      }
+    });
+
+    var preventVM = new Vue({
+      el: '#prevent',
       methods: {
         handleClick() {
           console.log('handle click');
