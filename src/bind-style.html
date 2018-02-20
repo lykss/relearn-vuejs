@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Bind Style</title>
+</head>
+<body>
+
+  <!-- 绑定内联样式 -->
+  <!-- 对象语法 -->
+  <!-- CSS属性名可以用驼峰式(camelCase)或段横线分隔(kebab-case,记得用单引号括起来)来命名 -->
+  <div id="demo1" v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }"></div>
+
+  <!-- 直接绑定到一个样式对象会使模板更加清晰 -->
+  <!-- 对象语法常常结合返回对象的计算属性使用 -->
+  <div id="demo2" v-bind:style="styleObject"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+  <script>
+    var demo1VM = new Vue({
+      el: '#demo1',
+      data () {
+        return {
+          activeColor: '#0f0',
+          fontSize: 12
+        }
+      }
+    });
+
+    var demo2VM = new Vue({
+      el: '#demo2',
+      data () {
+        return {
+          styleObject: {
+            color: 'red',
+            fontSize: '13px'
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
