@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Object Update Detect</title>
+</head>
+<body>
+  <article>
+    <h1>对象更改检测注意事项</h1>
+    <p>由于javascript的限制，Vue不能检测对象属性的添加或者删除。</p>
+    <p>对于已经创建的实例，Vue不能动态添加根级别的响应式属性。但是，可以使用Vue.set(object, key, value)方法向嵌套对象添加响应式属性。例如，对于：</p>
+    <pre>
+      <code>
+        var vm = new Vue({
+          data: {
+            userProfile: {
+              name: 'Anika'
+            }
+          }
+        })
+      </code>
+    </pre>
+    <p>可以添加一个新的age属性到嵌套的userProfile对象：</p>
+    <pre>
+      <code>
+        Vue.set(vm.userProfile, 'age', 27)
+      </code>
+    </pre>
+    <p>可以使用vm.$set实例方法，这是全局Vue.set的别名：</p>
+    <pre>
+      <code>
+        vm.$set(vm.userProfile, 'age', 27)
+      </code>
+    </pre>
+    <p>有时候需要为已有对象赋予多个新属性，在这种情况下应该使用以下方法：</p>
+    <pre>
+      <code>
+        vm.userProfile = Object.assign({}, vm.userProfile, {age: 27, favoriteColor: 'Green'})
+      </code>
+    </pre>
+  </article>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+</body>
+</html>
