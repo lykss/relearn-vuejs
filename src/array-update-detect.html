@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Array Update Detect</title>
+</head>
+<body>
+  <article>
+    <h1>变异方法</h1>
+    <p>Vue包含一组观察数组的变异方法，所以这些方法也会触发视图更新。</p>
+    <ul>
+      <li>push()</li>
+      <li>pop()</li>
+      <li>shift()</li>
+      <li>unshift()</li>
+      <li>splice()</li>
+      <li>sort()</li>
+      <li>reverse()</li>
+    </ul>
+  </article>
+
+  <article>
+    <h1>注意事项</h1>
+    <p>由于javascript的限制，Vue不能检测以下变动的数组：</p>
+    <ul>
+      <li>利用索引直接设置一个项，例如:vm.items[idx] = newValue</li>
+      <li>修改数组长度，例如：vm.items.length = newLength</li>
+    </ul>
+    <p>为了解决第一类问题，可以使用以下方式：example.items.splice(idx, 1, newValue)</p>
+    <p>为了解决第二类问题，可以使用以下方式：example.items.splice(newLength)</p>
+  </article>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+</body>
+</html>
