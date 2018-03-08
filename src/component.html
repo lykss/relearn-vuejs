@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Component</title>
+</head>
+<body>
+  <article>
+    <h1>组件</h1>
+    <p>组件可以扩展HTML元素，封装可重用代码。在较高层面上，组件是自定义元素，Vue.js的编译器为组件添加特殊功能。在有些情况下，组件也可以表现为用is特性进行了扩展的原生HTML元素。</p>
+    <p>所有的Vue组件同时也都是Vue实例，所以可以接受相同的选项对象(除了一些根级特有的选项)并提供相同的生命周期钩子。</p>
+  </article>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+  <script>
+    // 全局注册组件
+    // 自定义标签的命名比较好的做法是，小写，并且包含一个短杠
+    Vue.component('my-component', {
+      // 选项
+    })
+  </script>
+
+  <div id="example1">
+    <example-component></example-component>
+  </div>
+  <script>
+    // 组件在注册之后，就可以作为自定义元素<my-component></my-component>在一个实例的模板仲使用。注意确保在初始化根实例之前注册组件。
+    Vue.component('example-component', {
+      template: '<div>A example component</div>'
+    })
+
+    // 创建根实例
+    new Vue({
+      el: '#example1'
+    })
+  </script>
+</body>
+</html>
