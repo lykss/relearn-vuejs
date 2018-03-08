@@ -11,6 +11,11 @@
     <button type="button" v-on:click="sayHello">Click</button>
   </div>
 
+  <div id="example2">
+    <!-- 可以使用特殊变量$event访问原始DOM事件 -->
+    <button type="button" v-on:click="warn('Can not click', $event)">Can not click!</button>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
   <script>
     var example1VM = new Vue({
@@ -19,6 +24,17 @@
         sayHello (event) {
           var tagName = event.target.tagName
           alert('Hello! ' + tagName)
+        }
+      }
+    })
+  </script>
+  <script>
+    var example2VM = new Vue({
+      el: '#example2',
+      methods: {
+        warn (msg, event) {
+          var tagName = event.target.tagName
+          alert(tagName + ' can not click!')
         }
       }
     })
