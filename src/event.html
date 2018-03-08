@@ -37,6 +37,23 @@
   <div>使用事件修饰符时顺序非常重要，因为相应的代码会以同样的顺序产生。因此，用v-on:click.prevent.self会阻止所有的点击。而v-on:click.self.prevent只会阻止对元素自身的点击。</div>
   <div>其他修饰符只能对原生DOM事件起作用，.once修饰符还可以被用到自定义组件事件上。</div>
 
+  <article>
+    <h1>按键修饰符</h1>
+    <p>Vue为常见的按键提供别名</p>
+    <ul>
+      <li>.enter</li>
+      <li>.tab</li>
+      <li>.delete</li>
+      <li>.esc</li>
+      <li>.space</li>
+      <li>.up</li>
+      <li>.down</li>
+      <li>.left</li>
+      <li>.right</li>
+    </ul>
+    <p>可以使用全局config.keyCodes对象自定义按键修饰符别名，Vue.config.keyCodes.f1 = 112</p>
+  </article>
+
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
   <script>
     var example1VM = new Vue({
