@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Form Input</title>
+</head>
+<body>
+  <div id="example1">
+    <input v-model="msg" placeholder="edit me"/>
+
+    <!-- 可以使用lazy修饰符从而转变为使用change事件进行同步 -->
+    <input v-model.lazy="msg"/>
+
+    <!-- 如果希望自动将用户的输入值转为数值类型，可以使用number修饰符 -->
+    <input v-model.number="age" type="number"/>
+
+    <!-- 如果要自动过滤用户输入的首尾空白字符，可以使用trim修饰符 -->
+    <input v-model.trim="msg"/>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+  <script>
+    var example1VM = new Vue({
+      el: '#example1',
+      data () {
+        return {
+          msg: 'example1',
+          age: 1
+        }
+      }
+    })
+  </script>
+</body>
+</html>
