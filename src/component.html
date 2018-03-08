@@ -36,5 +36,47 @@
       el: '#example1'
     })
   </script>
+
+  <div id="example2">
+    <child></child>
+  </div>
+  <script>
+    // 可以通过某个Vue实例/组件的实例选项components注册仅在其作用域中可用的组件
+    var Child = {
+      template: '<div>A child component</div>'
+    }
+
+    new Vue({
+      el: '#example2',
+      components: {
+        'child': Child
+      }
+    })
+  </script>
+
+  <article>
+    <h1>DOM模板解析注意事项</h1>
+    <p>当使用DOM作为模板时(例如使用el选项来把Vue实例挂载到一个已有内容的元素上)，会受到HTML本身的一些限制，因此当在table元素中使用my-row自定义组件时会被当作无效内容，因此会导致错误的渲染结果。变通的方案是使用特殊的is特性:</p>
+    <pre>
+      <code>
+        <table>
+          <tr is="my-row"></tr>
+        </table>
+      </code>
+    </pre>
+    <p>应当注意的是，如果使用来自以下来源之一的字符串模板则没有这些限制</p>
+    <ul>
+      <li>
+        <pre>
+          <code>
+            <script type="text/x-template"></script>
+          </code>
+        </pre>
+      </li>
+      <li>javascript内联模板字符串</li>
+      <li>.vue组件</li>
+    </ul>
+    <p>因此，请尽可能使用字符串模板</p>
+  </article>
 </body>
 </html>
