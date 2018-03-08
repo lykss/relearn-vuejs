@@ -42,6 +42,29 @@
     </template>
   </ul>
 
+  <article>
+    <h1>v-for与v-if</h1>
+    <p>当这两个指令处于同一个节点时，v-for的优先级比v-if更高，这意味着v-if将分别重复运行于每个v-for循环中。</p>
+    <pre>
+      <code>
+        <li v-for="todo in todos" v-if="!todo.isComplete">
+          {{todo}}
+        </li>
+      </code>
+    </pre>
+    <p>上面的代码只会渲染未完成的todos</p>
+    <p>如果目的是有条件地跳过循环的执行，那么可以将v-if置于外层元素或者template元素上。</p>
+    <pre>
+      <code>
+        <ul v-if="todos.length">
+          <li v-for="todo in todos">
+            {{todo}}
+          </li>
+        </ul>
+      </code>
+    </pre>
+  </article>
+
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
   <script>
     var forVM = new Vue({
