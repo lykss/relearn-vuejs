@@ -88,5 +88,25 @@
     <h1>组件组合</h1>
     <p>在Vue中，父子组件的关系可以总结为prop向下传递，事件向上传递。父组件通过prop给子组件下发数据，子组件通过事件给父组件发送消息。</p>
   </article>
+
+  <article>
+    <h1>Prop</h1>
+    <h2>使用Prop传递数据</h2>
+    <p>组件实例的作用域是孤立的。这意味着不能也不应该在子组件的模板内直接引用父组件的数据。父组件的数据需要通过prop才能发送到子组件中。</p>
+    <p>子组件要显式地用props选项声明它预期的数据。</p>
+  </article>
+  <div id="prop_example">
+    <child msg="hello!"></child>
+  </div>
+  <script>
+    Vue.component('child', {
+      props: ['msg'],
+      template: '<span>{{msg}}</span>'
+    })
+
+    new Vue({
+      el: '#prop_example'
+    })
+  </script>
 </body>
 </html>
