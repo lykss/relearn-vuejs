@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Condition Render</title>
+</head>
+<body>
+  <article>
+    <h1>v-if与v-show</h1>
+    <p>v-if会确保在切换过程中条件块内的事件监听器和子组件适当地被销毁和重建</p>
+    <p>v-show不管初始条件是什么，元素都会被渲染，并且只是简单地切换元素的CSS属性display</p>
+    <p>一般来说，v-if有更高的切换开销，而v-show有更高的初始渲染开销。因此，如果需要非常频繁的切换则使用v-show较好。如果在运行时条件很少改变则使用v-if较好。</p>
+    <p>需要补充一点的是，如果html代码确实需要隐藏而不被查看，则使用v-if会更加合适，因为使用v-show时可以通过设置display属性来查看对应的界面代码。这对于根据权限展示不同页面内容非常有必要。</p>
+  </article>
+
+  <div>
+    当v-if与v-for一起使用时，v-for的优先级比v-if的优先级更高。
+  </div>
+
+  <div id="vif">
+    <h1 v-if="isShowTitle">Title</h1>
+    <p v-else>content</p>
+    <button @click="toggleVisiable">切换</button>
+  </div>
+
+  <div id="vshow">
+    <h1 v-show="isShowTitle">Title</h1>
+    <button @click="toggleVisiable">切换</button>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+  <script>
+    var ifVM = new Vue({
+      el: '#vif',
+      data () {
+        return {
+          isShowTitle: true
+        }
+      },
+      methods: {
+        toggleVisiable () {
+          this.isShowTitle = !this.isShowTitle
+        }
+      }
+    })
+  </script>
+  <script>
+    var showVM = new Vue({
+      el: '#vshow',
+      data () {
+        return {
+          isShowTitle: true
+        }
+      },
+      methods: {
+        toggleVisiable () {
+          this.isShowTitle = !this.isShowTitle
+        }
+      }
+    })
+  </script>
+</body>
+</html>
