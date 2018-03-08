@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Component</title>
+</head>
+<body>
+  <article>
+    <h1>组件</h1>
+    <p>组件可以扩展HTML元素，封装可重用代码。在较高层面上，组件是自定义元素，Vue.js的编译器为组件添加特殊功能。在有些情况下，组件也可以表现为用is特性进行了扩展的原生HTML元素。</p>
+    <p>所有的Vue组件同时也都是Vue实例，所以可以接受相同的选项对象(除了一些根级特有的选项)并提供相同的生命周期钩子。</p>
+  </article>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+  <script>
+    // 全局注册组件
+    // 自定义标签的命名比较好的做法是，小写，并且包含一个短杠
+    Vue.component('my-component', {
+      // 选项
+    })
+  </script>
+
+  <div id="example1">
+    <example-component></example-component>
+  </div>
+  <script>
+    // 组件在注册之后，就可以作为自定义元素<my-component></my-component>在一个实例的模板仲使用。注意确保在初始化根实例之前注册组件。
+    Vue.component('example-component', {
+      template: '<div>A example component</div>'
+    })
+
+    // 创建根实例
+    new Vue({
+      el: '#example1'
+    })
+  </script>
+
+  <div id="example2">
+    <child></child>
+  </div>
+  <script>
+    // 可以通过某个Vue实例/组件的实例选项components注册仅在其作用域中可用的组件
+    var Child = {
+      template: '<div>A child component</div>'
+    }
+
+    new Vue({
+      el: '#example2',
+      components: {
+        'child': Child
+      }
+    })
+  </script>
+
+  <article>
+    <h1>DOM模板解析注意事项</h1>
+    <p>当使用DOM作为模板时(例如使用el选项来把Vue实例挂载到一个已有内容的元素上)，会受到HTML本身的一些限制，因此当在table元素中使用my-row自定义组件时会被当作无效内容，因此会导致错误的渲染结果。变通的方案是使用特殊的is特性:</p>
+    <pre>
+      <code>
+        <table>
+          <tr is="my-row"></tr>
+        </table>
+      </code>
+    </pre>
+    <p>应当注意的是，如果使用来自以下来源之一的字符串模板则没有这些限制</p>
+    <ul>
+      <li>
+        <pre>
+          <code>
+            <script type="text/x-template"></script>
+          </code>
+        </pre>
+      </li>
+      <li>javascript内联模板字符串</li>
+      <li>.vue组件</li>
+    </ul>
+    <p>因此，请尽可能使用字符串模板</p>
+  </article>
+
+  <article>
+    <h1>data必须是函数</h1>
+    <p>构造Vue实例时传入的各种选项大多数都可以在组件里使用。只有一个例外：data必须是函数。因为如果data直接设置为一个对象，则不同实例之间的数据会相互干扰，导致程序出错。</p>
+  </article>
+
+  <article>
+    <h1>组件组合</h1>
+    <p>在Vue中，父子组件的关系可以总结为prop向下传递，事件向上传递。父组件通过prop给子组件下发数据，子组件通过事件给父组件发送消息。</p>
+  </article>
+
+  <article>
+    <h1>Prop</h1>
+    <h2>使用Prop传递数据</h2>
+    <p>组件实例的作用域是孤立的。这意味着不能也不应该在子组件的模板内直接引用父组件的数据。父组件的数据需要通过prop才能发送到子组件中。</p>
+    <p>子组件要显式地用props选项声明它预期的数据。</p>
+
+    <h2>camelCase vs kebab-case</h2>
+    <p>HTML特性是不区分大小写的。所以当使用的不是字符串模板时，camelCase(驼峰式命名)的prop需要转换为相对于的kebab-case(段横线分割式命名)。</p>
+    <p>如果使用字符串模板则没有这些限制。</p>
+
+    <h2>动态Prop</h2>
+    <p>可以使用v-bind来动态地将prop绑定到父组件的数据。当父组件的数据变化时，该变化也会传到给子组件。</p>
+    <p>如果想把一个对象的所有属性作为prop进行传递，可以使用不带任何参数的v-bind。</p>
+    <pre>
+      <code>
+        var todo = {
+          text: 'Learn Vue',
+          isComplete: false
+        }
+
+        <todo-item v-bind="todo"></todo-item>
+        <!-- 等价于 -->
+        <todo-item v-bind:text="todo.text" v-bind:is-complete="todo.isComplete"></todo-item>
+      </code>
+    </pre>
+  </article>
+  <div id="prop_example">
+    <child msg="hello!"></child>
+  </div>
+  <script>
+    Vue.component('child', {
+      props: ['msg'],
+      template: '<span>{{msg}}</span>'
+    })
+
+    new Vue({
+      el: '#prop_example'
+    })
+  </script>
+
+  <article>
+    <h1>使用插槽分发内容</h1>
+    <h2>编译作用域</h2>
+    <p>父组件模板的内容在父组件作用域内编译，子组件模板的内容在子组件作用域内编译。</p>
+
+    <h2>单个插槽</h2>
+    <p>除非子组件模板包含至少一个slot插口，否则父组件的内容将会被丢弃。当子组件模板只有一个没有属性的插槽时，父组件传入的整个内容片段会插入到插槽所有的DOM位置，并替换插槽标签本身。</p>
+    <p>最初在slot标签中的任何内容都被视为备用内容。备用内容在子组件的作用域内编译，并且只有在宿主元素为空，且没有要插入的内容时才显示备用内容。</p>
+
+    <h2>具名插槽</h2>
+    <p>slot元素可以用一个特殊的特性name来进一步配置如何分发内容。多个插槽可以有不同的名字。具名插槽将匹配内容片段中有对应slot特性的元素。</p>
+    <p>依然可以有一个匿名插槽，它是默认插槽没座位找不到匹配的内容片段的备用插槽。如果没有默认插槽，这些找不到匹配的内容片段将会被抛弃。</p>
+
+    <h2>作用域插槽</h2>
+    <p>作用域插槽是一种特殊类型的插槽，用作一个能被传递数据的可重用模板，来代替已经渲染好的元素。</p>
+
+    <h2>动态组件</h2>
+    <p>通过使用保留的component元素，并对其使用is特性进行动态绑定，可以在同一个挂载点动态切换多个组件。</p>
+
+    <h2>keep-alive</h2>
+    <p>如果把切换出去的组件保留在内存中，可以保留它的状态或避免重新渲染。为此，可以添加一个keep-alive指令参数。</p>
+
+    <h2>子组件引用</h2>
+    <p>可以使用ref为子组件指定一个引用ID，以此来直接访问子组件。</p>
+    <p>当ref和v-for一起使用时，获取到的引用会是一个数组，包含和循环数据源对应的子组件。</p>
+    <p>$refs只在组件渲染完成后才填充，并且它是非响应式的。它仅仅是一个直接操作子组件的应用方案，因此应当避免在模板或计算属性中使用$refs</p>
+  </article>
+</body>
+</html>
