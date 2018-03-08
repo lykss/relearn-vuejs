@@ -27,6 +27,13 @@
       {{key}} : {{value}}
     </li>
   </ul>
+
+  <!-- 一段取值范围的v-for -->
+  <!-- v-for也可以取整数。在这种情况下，它将重复多次模板。 -->
+  <div id="for_num">
+    <span v-for="n in 10">{{n}}</span>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
   <script>
     var forVM = new Vue({
@@ -53,6 +60,11 @@
           }
         }
       }
+    })
+  </script>
+  <script>
+    var forNumVM = new Vue({
+      el: '#for_num'
     })
   </script>
 </body>
