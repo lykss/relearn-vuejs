@@ -15,6 +15,10 @@
     <p>需要补充一点的是，如果html代码确实需要隐藏而不被查看，则使用v-if会更加合适，因为使用v-show时可以通过设置display属性来查看对应的界面代码。这对于根据权限展示不同页面内容非常有必要。</p>
   </article>
 
+  <div>
+    当v-if与v-for一起使用时，v-for的优先级比v-if的优先级更高。
+  </div>
+
   <div id="vif">
     <h1 v-if="isShowTitle">Title</h1>
     <p v-else>content</p>
