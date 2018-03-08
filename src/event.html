@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Event</title>
+</head>
+<body>
+  <div id="example1">
+    <button type="button" v-on:click="sayHello">Click</button>
+  </div>
+
+  <div id="example2">
+    <!-- 可以使用特殊变量$event访问原始DOM事件 -->
+    <button type="button" v-on:click="warn('Can not click', $event)">Can not click!</button>
+  </div>
+
+  <!-- 事件修饰符 -->
+  <!-- 阻止事件继续传播 -->
+  <a v-on:click.stop="doThis"></a>
+  <!-- 提交事件不再重载页面 -->
+  <form v-on:submit.prevent="onSubmit"></form>
+  <!-- 修饰符可以串联 -->
+  <a v-on:click.stop.prevent="doThat"></a>
+  <!-- 只有修饰符 -->
+  <form v-on:submit.prevent></form>
+  <!-- 添加事件监听器时使用事件捕获模式 -->
+  <!-- 即元素自身触发的事件先在此处理，然后才交由内部元素进行处理 -->
+  <div v-on:click.capture="doThat">...</div>
+  <!-- 只当在event.target是当前元素自身时触发处理函数 -->
+  <!-- 即事件不是从内部元素触发的 -->
+  <div v-on:click.self="doThat"></div>
+  <!-- 只触发一次 -->
+  <a v-on:click.once="doThis"></a>
+
+  <div>使用事件修饰符时顺序非常重要，因为相应的代码会以同样的顺序产生。因此，用v-on:click.prevent.self会阻止所有的点击。而v-on:click.self.prevent只会阻止对元素自身的点击。</div>
+  <div>其他修饰符只能对原生DOM事件起作用，.once修饰符还可以被用到自定义组件事件上。</div>
+
+  <article>
+    <h1>按键修饰符</h1>
+    <p>Vue为常见的按键提供别名</p>
+    <ul>
+      <li>.enter</li>
+      <li>.tab</li>
+      <li>.delete</li>
+      <li>.esc</li>
+      <li>.space</li>
+      <li>.up</li>
+      <li>.down</li>
+      <li>.left</li>
+      <li>.right</li>
+    </ul>
+    <p>可以使用全局config.keyCodes对象自定义按键修饰符别名，Vue.config.keyCodes.f1 = 112</p>
+  </article>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+  <script>
+    var example1VM = new Vue({
+      el: '#example1',
+      methods: {
+        sayHello (event) {
+          var tagName = event.target.tagName
+          alert('Hello! ' + tagName)
+        }
+      }
+    })
+  </script>
+  <script>
+    var example2VM = new Vue({
+      el: '#example2',
+      methods: {
+        warn (msg, event) {
+          var tagName = event.target.tagName
+          alert(tagName + ' can not click!')
+        }
+      }
+    })
+  </script>
+</body>
+</html>
