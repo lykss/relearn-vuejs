@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>List Render</title>
+</head>
+<body>
+  <!-- 在v-for块中，拥有对父作用域属性的完全访问权限 -->
+  <!-- v-for支持一个可选的第二个参数作为当前项的索引 -->
+  <!-- 可以使用of替代in作为分隔符 -->
+  <ul id="vfor">
+    <li v-for="(item, idx) in items">
+      {{idx}} : {{item.message}}
+    </li>
+    <li v-for="(item, idx) of items">
+      {{idx}} : {{item.message}}
+    </li>
+  </ul>
+
+  <!-- 可以使用v-for通过一个对象的属性来迭代 -->
+  <!-- 可以提供第二个的参数为键名 -->
+  <!-- 遍历对象时是按照Object.keys()的结果遍历，但不能保证在不同javascript引擎下的结果是一致的 -->
+  <ul id="vfor_object">
+    <li v-for="(value, key) in object">
+      {{key}} : {{value}}
+    </li>
+  </ul>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+  <script>
+    var forVM = new Vue({
+      el: '#vfor',
+      data () {
+        return {
+          items: [
+            {message: 'Foo'},
+            {message: 'Bar'}
+          ]
+        }
+      }
+    })
+  </script>
+  <script>
+    var forObjVM = new Vue({
+      el: '#vfor_object',
+      data () {
+        return {
+          object: {
+            firstname: 'John',
+            lastname: 'Doe',
+            age: 30
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>
