@@ -94,9 +94,26 @@
     <h2>使用Prop传递数据</h2>
     <p>组件实例的作用域是孤立的。这意味着不能也不应该在子组件的模板内直接引用父组件的数据。父组件的数据需要通过prop才能发送到子组件中。</p>
     <p>子组件要显式地用props选项声明它预期的数据。</p>
+
     <h2>camelCase vs kebab-case</h2>
     <p>HTML特性是不区分大小写的。所以当使用的不是字符串模板时，camelCase(驼峰式命名)的prop需要转换为相对于的kebab-case(段横线分割式命名)。</p>
     <p>如果使用字符串模板则没有这些限制。</p>
+
+    <h2>动态Prop</h2>
+    <p>可以使用v-bind来动态地将prop绑定到父组件的数据。当父组件的数据变化时，该变化也会传到给子组件。</p>
+    <p>如果想把一个对象的所有属性作为prop进行传递，可以使用不带任何参数的v-bind。</p>
+    <pre>
+      <code>
+        var todo = {
+          text: 'Learn Vue',
+          isComplete: false
+        }
+
+        <todo-item v-bind="todo"></todo-item>
+        <!-- 等价于 -->
+        <todo-item v-bind:text="todo.text" v-bind:is-complete="todo.isComplete"></todo-item>
+      </code>
+    </pre>
   </article>
   <div id="prop_example">
     <child msg="hello!"></child>
